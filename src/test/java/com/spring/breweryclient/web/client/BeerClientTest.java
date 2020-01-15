@@ -12,24 +12,31 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.spring.breweryclient.web.model.BeerDto;
 
 @SpringBootTest
-public class BeerClientTest{
-	
+public class BeerClientTest {
+
 	@Autowired
 	BreweryClient client;
-	
+
 	@Test
 	void getBeerId() {
 		BeerDto dto = client.getBeerById(UUID.randomUUID());
 		assertNotNull(dto);
 	}
-	
+
 	@Test
 	void saveNewBeer() {
-		//given
-		BeerDto beerDto= BeerDto.builder().beerName("New Beer").build();
+		// given
+		BeerDto beerDto = BeerDto.builder().beerName("New Beer").build();
 		URI uri = client.saveNewBeer(beerDto);
 		System.out.println(uri.toString());
-		
+
+	}
+
+	@Test
+	void updateBeer() {
+		// given
+		BeerDto beerDto = BeerDto.builder().beerName("New Beer").build();
+		client.updateBeer(UUID.randomUUID(), beerDto);
 	}
 
 }
